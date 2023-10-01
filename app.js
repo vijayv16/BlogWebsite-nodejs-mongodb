@@ -19,7 +19,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/blogDB");
 //Mongoose connection to MongoDB blogDB database
 mongoose.connect(process.env.MONGO_URL);
 
-app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,7 +45,7 @@ app.get("/", function(req, res){
       if(foundPosts.length === 0) {
         post1.save();
       } else {
-        res.render("home", {
+        res.render("home.ejs", {
           startingContent: homeStartingContent,
           posts: foundPosts
           });
@@ -58,15 +57,15 @@ app.get("/", function(req, res){
 });
 
 app.get("/about", function(req, res){
-  res.render("about");
+  res.render("about.ejs");
 });
 
 app.get("/contact", function(req, res){
-  res.render("contact");
+  res.render("contact.ejs");
 });
 
 app.get("/compose", function(req, res){
-  res.render("compose");
+  res.render("compose.ejs");
 });
 
 app.post("/compose", function(req, res){
@@ -85,7 +84,7 @@ app.get("/posts/:postId", function(req, res){
 
   Post.findOne({_id: requestedPostId})
     .then((post)=>{
-      res.render("post", {
+      res.render("post.ejs", {
         title : post.title,  
         content : post.content,
       })
