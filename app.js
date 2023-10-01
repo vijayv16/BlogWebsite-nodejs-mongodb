@@ -45,7 +45,7 @@ app.get("/", function(req, res){
       if(foundPosts.length === 0) {
         post1.save();
       } else {
-        res.render("home.ejs", {
+        res.render("home", {
           startingContent: homeStartingContent,
           posts: foundPosts
           });
@@ -57,15 +57,15 @@ app.get("/", function(req, res){
 });
 
 app.get("/about", function(req, res){
-  res.render("about.ejs");
+  res.render("about");
 });
 
 app.get("/contact", function(req, res){
-  res.render("contact.ejs");
+  res.render("contact");
 });
 
 app.get("/compose", function(req, res){
-  res.render("compose.ejs");
+  res.render("compose");
 });
 
 app.post("/compose", function(req, res){
@@ -84,7 +84,7 @@ app.get("/posts/:postId", function(req, res){
 
   Post.findOne({_id: requestedPostId})
     .then((post)=>{
-      res.render("post.ejs", {
+      res.render("post", {
         title : post.title,  
         content : post.content,
       })
