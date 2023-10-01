@@ -19,6 +19,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/blogDB");
 //Mongoose connection to MongoDB blogDB database
 mongoose.connect(process.env.MONGO_URL);
 
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -84,7 +85,7 @@ app.get("/posts/:postId", function(req, res){
 
   Post.findOne({_id: requestedPostId})
     .then((post)=>{
-      res.render("post.ejs", {
+      res.render("post", {
         title : post.title,  
         content : post.content,
       })
